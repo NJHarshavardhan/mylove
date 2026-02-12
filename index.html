@@ -19,6 +19,9 @@
       padding: 0;
       box-sizing: border-box;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #ffb3d9 0%, #ff6ba8 50%, #ff85c0 100%);
@@ -464,6 +467,7 @@
       opacity: 0;
       animation: celebrationFadeIn 1s ease-out forwards;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 0;
     }
     .celebration.active {
@@ -607,7 +611,7 @@
       position: fixed;
       left: -100px;
       pointer-events: none;
-      z-index: 9997;
+      z-index: 9999;
       animation: flyAcross 10s linear forwards;
       font-size: 40px;
     }
@@ -1122,7 +1126,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
     function escapeButton(e) {
       e.preventDefault();
       const maxX = window.innerWidth - noBtn.offsetWidth - 60;
-      const maxY = window.innerHeight - noBtn.offsetHeight - 60;
+      const maxY = (window.innerHeight / 2) - noBtn.offsetHeight - 60;
       const rx = Math.random() * maxX + 30;
       const ry = Math.random() * maxY + 30;
       noBtn.style.position = 'fixed';
@@ -1197,7 +1201,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
       setTimeout(() => createFlyingHearts(), 2000);
 
       // Recurring effects - heart blossom now continuous
-      flyingHeartInterval = setInterval(createFlyingHearts, 4000); // More frequent flying hearts
+      flyingHeartInterval = setInterval(createFlyingHearts, 4000); // Flying hearts every 4 seconds
       sparkleInterval    = setInterval(createSparkleExplosion, 8000);
       blossomInterval    = setInterval(createHeartBlossomExplosion, 4000); // Continuous heart explosions every 4 seconds
     });
@@ -1248,7 +1252,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
 
     function createFlyingHearts() {
       const hearts = ['💕','💖','💗','💝','💓','💞','❤️','💘','💟','❣️'];
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 5; i++) {
         setTimeout(() => {
           const h = document.createElement('div');
           h.className = 'flying-heart';
@@ -1258,7 +1262,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
           h.style.animationDuration = (8 + Math.random()*4) + 's';
           document.body.appendChild(h);
           setTimeout(() => h.remove(), 12000);
-        }, i * 500);
+        }, i * 300);
       }
     }
 
