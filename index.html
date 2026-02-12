@@ -21,6 +21,7 @@
     }
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
     body {
       font-family: 'Poppins', sans-serif;
@@ -28,10 +29,12 @@
       min-height: 100vh;
       overflow-x: hidden;
       color: #2d1b2e;
-      transition: overflow 0.4s;
+      transition: overflow 0.3s ease;
     }
     body.celebration-active {
       overflow: hidden;
+      position: fixed;
+      width: 100%;
     }
 
     .text-background {
@@ -465,13 +468,14 @@
       align-items: center;
       justify-content: center;
       opacity: 0;
-      animation: celebrationFadeIn 1s ease-out forwards;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       overflow-y: auto;
       overflow-x: hidden;
       padding: 0;
     }
     .celebration.active {
       display: flex;
+      animation: celebrationFadeIn 0.6s ease-out forwards;
     }
     @keyframes celebrationFadeIn {
       to { opacity: 1; }
@@ -487,48 +491,95 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      gap: clamp(1rem, 2vh, 2rem);
+    }
+    .celebration.active .celebration-content {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      transition-delay: 0.2s;
     }
     .celebration-content h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: clamp(3.5rem, 10vw, 7rem);
-      color: white;
-      margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
-      text-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 80px rgba(255,107,157,0.6);
+      font-size: clamp(4rem, 12vw, 9rem);
+      color: #ffffff;
+      margin-bottom: clamp(1.5rem, 2.5vh, 3rem);
+      text-shadow: 
+        0 0 80px rgba(255,255,255,1),
+        0 0 120px rgba(255,255,255,0.9),
+        0 0 160px rgba(255,107,157,1),
+        0 6px 40px rgba(0,0,0,0.6),
+        0 10px 60px rgba(0,0,0,0.4);
       animation: pulseGlow 2s ease-in-out infinite;
-      line-height: 1.1;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: 2px;
+      filter: drop-shadow(0 0 30px rgba(255,255,255,0.8));
     }
     @keyframes pulseGlow {
-      0%,100% { text-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 80px rgba(255,107,157,0.6); transform: scale(1); }
-      50% { text-shadow: 0 0 60px rgba(255,255,255,1), 0 0 120px rgba(255,107,157,0.9); transform: scale(1.05); }
+      0%,100% { 
+        text-shadow: 
+          0 0 80px rgba(255,255,255,1),
+          0 0 120px rgba(255,255,255,0.9),
+          0 0 160px rgba(255,107,157,1),
+          0 6px 40px rgba(0,0,0,0.6),
+          0 10px 60px rgba(0,0,0,0.4);
+        transform: scale(1); 
+        filter: drop-shadow(0 0 30px rgba(255,255,255,0.8));
+      }
+      50% { 
+        text-shadow: 
+          0 0 100px rgba(255,255,255,1),
+          0 0 150px rgba(255,255,255,1),
+          0 0 200px rgba(255,107,157,1),
+          0 8px 50px rgba(0,0,0,0.7),
+          0 12px 70px rgba(0,0,0,0.5);
+        transform: scale(1.03); 
+        filter: drop-shadow(0 0 50px rgba(255,255,255,1));
+      }
     }
     .subtitle-main {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-size: clamp(2rem, 6vw, 4rem);
       font-style: italic;
-      color: rgba(255,255,255,0.98);
-      margin-bottom: clamp(3rem, 4vh, 4rem);
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      color: #ffffff;
+      margin-bottom: clamp(2.5rem, 3.5vh, 4rem);
+      text-shadow: 
+        0 0 50px rgba(255,255,255,1),
+        0 0 80px rgba(255,255,255,0.8),
+        0 4px 25px rgba(0,0,0,0.7),
+        0 8px 40px rgba(0,0,0,0.5);
+      font-weight: 600;
+      filter: drop-shadow(0 0 20px rgba(255,255,255,0.7));
     }
     .love-note {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.4rem, 4vw, 2.2rem);
-      line-height: 1.6;
-      max-width: 700px;
-      margin: clamp(2rem, 3vh, 3rem) auto;
-      color: white;
-      text-shadow: 0 3px 15px rgba(0,0,0,0.6);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      line-height: 1.7;
+      max-width: 750px;
+      margin: clamp(2rem, 3vh, 3.5rem) auto;
+      color: #ffffff;
+      text-shadow: 
+        0 0 40px rgba(255,255,255,0.9),
+        0 0 60px rgba(255,255,255,0.7),
+        0 4px 20px rgba(0,0,0,0.8),
+        0 8px 35px rgba(0,0,0,0.6);
       font-style: italic;
-      font-weight: 400;
+      font-weight: 500;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.6));
     }
     .initials-heart-wrapper {
-      margin: clamp(2.5rem, 4vh, 4rem) auto;
+      margin: clamp(2rem, 3vh, 3rem) auto;
     }
     .initials-heart {
       position: relative;
-      width: clamp(180px, 35vw, 300px);
-      height: clamp(180px, 35vw, 300px);
+      width: clamp(160px, 30vw, 280px);
+      height: clamp(160px, 30vw, 280px);
       margin: 0 auto;
       animation: heartBeatSlow 3.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(255,255,255,0.6));
     }
     .initials-heart::before,
     .initials-heart::after {
@@ -556,23 +607,39 @@
       inset: 50% auto auto 50%;
       transform: translate(-50%, -50%);
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(5rem, 11vw, 9rem);
+      font-size: clamp(4rem, 10vw, 8rem);
       color: #ff1493;
       text-shadow: 0 0 25px rgba(255,20,147,0.9), 4px 4px 15px rgba(0,0,0,0.4);
+      z-index: 1;
     }
     .forever-text {
       font-family: 'Sacramento', cursive;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      color: white;
-      margin: clamp(1.5rem, 2vh, 2rem) 0 clamp(1rem, 1.5vh, 1.5rem);
-      text-shadow: 0 5px 25px rgba(0,0,0,0.6);
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: #ffffff;
+      margin: clamp(2rem, 2.5vh, 3rem) 0 clamp(1rem, 1.5vh, 2rem);
+      text-shadow: 
+        0 0 50px rgba(255,255,255,1),
+        0 0 80px rgba(255,255,255,0.8),
+        0 6px 30px rgba(0,0,0,0.8),
+        0 10px 45px rgba(0,0,0,0.6);
       line-height: 1.2;
+      filter: drop-shadow(0 0 20px rgba(255,255,255,0.7));
     }
     .celebration-subtitle {
       font-family: 'Parisienne', cursive;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      color: rgba(255,255,255,0.95);
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      color: #ffffff;
+      text-shadow: 
+        0 0 45px rgba(255,255,255,0.9),
+        0 0 70px rgba(255,255,255,0.7),
+        0 5px 25px rgba(0,0,0,0.7),
+        0 8px 40px rgba(0,0,0,0.5);
+      margin-top: clamp(0.5rem, 1vh, 1rem);
+      line-height: 1.5;
+      max-width: 95%;
+      margin-left: auto;
+      margin-right: auto;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.6));
     }
     @keyframes heartBeatSlow {
       0%,100% { transform: scale(1); }
@@ -587,6 +654,7 @@
       animation: confettiFall 5s linear forwards;
       pointer-events: none;
       z-index: 9999;
+      will-change: transform, opacity;
     }
     @keyframes confettiFall {
       0% { transform: translateY(0) rotate(0deg); opacity: 1; }
@@ -597,6 +665,7 @@
       pointer-events: none;
       z-index: 9998;
       font-size: 30px;
+      will-change: transform, opacity;
     }
     @keyframes blossomFloat {
       0% { transform: translate(0,0) scale(0) rotate(0deg); opacity: 0; }
@@ -614,6 +683,7 @@
       z-index: 9999;
       animation: flyAcross 10s linear forwards;
       font-size: 40px;
+      will-change: transform, opacity;
     }
     @keyframes flyAcross {
       0% { left: -100px; transform: translateY(0) rotate(0deg); }
@@ -627,10 +697,38 @@
       pointer-events: none;
       z-index: 9996;
       box-shadow: 0 0 10px #fff, 0 0 20px #ffd700;
+      will-change: transform, opacity;
     }
     @keyframes sparkleExplode {
       0% { transform: translate(0,0) scale(1); opacity: 1; }
       100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+    }
+    
+    /* Celebration page floating hearts from bottom */
+    .celebration-floating-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99997;
+      animation: celebrationFloatUp 6s ease-out forwards;
+      will-change: transform, opacity;
+    }
+    @keyframes celebrationFloatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-150vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* Celebration page diagonal hearts */
+    .celebration-diagonal-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99997;
+      filter: drop-shadow(0 0 15px rgba(255,107,157,0.8));
+      animation: celebrationDiagonalFloat 7s linear forwards;
+      will-change: transform, opacity;
+    }
+    @keyframes celebrationDiagonalFloat {
+      0% { transform: translate(0,0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(calc(-100vw - 100px), -120vh) rotate(-360deg); opacity: 0; }
     }
 
     @media (max-width: 768px) {
@@ -641,13 +739,37 @@
       .buttons { gap: 20px; }
       .btn { padding: 15px 40px; }
       .celebration-content {
-        padding: 3vh 5vw;
+        padding: 2.5vh 5vw;
         min-height: 100vh;
+        gap: clamp(1rem, 1.8vh, 2rem);
       }
       .celebration-content h1 {
-        font-size: clamp(3rem, 11vw, 6rem);
-        margin-bottom: 1.5rem;
+        font-size: clamp(3rem, 10vw, 6rem);
+        margin-bottom: 1.2rem;
       }
+      .subtitle-main {
+        font-size: clamp(1.6rem, 5.5vw, 3rem);
+        margin-bottom: 1.8rem;
+      }
+      .initials-heart {
+        width: clamp(150px, 35vw, 240px);
+        height: clamp(150px, 35vw, 240px);
+      }
+      .initials-text {
+        font-size: clamp(3.8rem, 11vw, 7rem);
+      }
+      .love-note {
+        font-size: clamp(1.25rem, 4vw, 2rem);
+        margin: 1.5rem auto;
+        line-height: 1.65;
+      }
+      .forever-text {
+        font-size: clamp(2.2rem, 7vw, 4.5rem);
+      }
+      .celebration-subtitle {
+        font-size: clamp(1.4rem, 4.5vw, 2.5rem);
+      }
+    }
       .subtitle-main {
         font-size: clamp(1.8rem, 5.5vw, 3rem);
         margin-bottom: 2.5rem;
@@ -676,38 +798,39 @@
     }
     @media (max-width: 576px) {
       .celebration-content {
-        padding: 2.5vh 4vw;
+        padding: 2vh 4vw;
         min-height: 100vh;
+        gap: clamp(0.8rem, 1.4vh, 1.6rem);
       }
       .celebration-content h1 {
-        font-size: clamp(2.5rem, 10vw, 5rem);
-        margin-bottom: 1.2rem;
+        font-size: clamp(2.5rem, 9.5vw, 5rem);
+        margin-bottom: 1rem;
       }
       .subtitle-main {
-        font-size: clamp(1.6rem, 5vw, 2.5rem);
-        margin-bottom: 2rem;
+        font-size: clamp(1.4rem, 5vw, 2.5rem);
+        margin-bottom: 1.5rem;
       }
       .love-note {
-        font-size: clamp(1.2rem, 3.5vw, 1.7rem);
-        margin: 1.8rem auto;
-        line-height: 1.5;
+        font-size: clamp(1.15rem, 3.5vw, 1.8rem);
+        margin: 1.3rem auto;
+        line-height: 1.6;
       }
       .initials-heart-wrapper {
-        margin: 2rem auto;
+        margin: 1.5rem auto;
       }
       .initials-heart {
-        width: clamp(140px, 36vw, 220px);
-        height: clamp(140px, 36vw, 220px);
+        width: clamp(130px, 33vw, 220px);
+        height: clamp(130px, 33vw, 220px);
       }
       .initials-text {
-        font-size: clamp(4rem, 9vw, 6rem);
+        font-size: clamp(3.5rem, 9vw, 6rem);
       }
       .forever-text {
-        font-size: clamp(2.2rem, 6.5vw, 4rem);
-        margin: 1.8rem 0 1.2rem;
+        font-size: clamp(2rem, 6.5vw, 4rem);
+        margin: 1.5rem 0 1rem;
       }
       .celebration-subtitle {
-        font-size: clamp(1.5rem, 4.5vw, 2.3rem);
+        font-size: clamp(1.3rem, 4.2vw, 2.2rem);
       }
     }
     @media (max-width: 480px) {
@@ -716,37 +839,40 @@
       .timeline-item { padding: 25px 15px; }
       .btn { padding: 12px 30px; font-size: 1rem; }
       .celebration-content {
-        padding: 2vh 4vw;
+        padding: 1.5vh 3.5vw;
         min-height: 100vh;
+        gap: clamp(0.6rem, 1.2vh, 1.3rem);
       }
       .celebration-content h1 {
         font-size: clamp(2.2rem, 9vw, 4.5rem);
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
       }
       .subtitle-main {
-        font-size: clamp(1.4rem, 4.5vw, 2.2rem);
-        margin-bottom: 1.8rem;
+        font-size: clamp(1.3rem, 4.5vw, 2.3rem);
+        margin-bottom: 1.3rem;
       }
       .love-note {
-        font-size: clamp(1.1rem, 3.2vw, 1.5rem);
-        margin: 1.5rem auto;
+        font-size: clamp(1.05rem, 3.2vw, 1.6rem);
+        margin: 1.1rem auto;
+        line-height: 1.55;
       }
       .initials-heart-wrapper {
-        margin: 1.8rem auto;
+        margin: 1.2rem auto;
       }
       .initials-heart {
-        width: clamp(130px, 35vw, 200px);
-        height: clamp(130px, 35vw, 200px);
+        width: clamp(115px, 31vw, 190px);
+        height: clamp(115px, 31vw, 190px);
       }
       .initials-text {
-        font-size: clamp(3.5rem, 8.5vw, 5.5rem);
+        font-size: clamp(3.2rem, 8.5vw, 5.5rem);
       }
       .forever-text {
-        font-size: clamp(2rem, 6vw, 3.5rem);
-        margin: 1.5rem 0 1rem;
+        font-size: clamp(1.85rem, 6vw, 3.5rem);
+        margin: 1.3rem 0 0.9rem;
       }
       .celebration-subtitle {
-        font-size: clamp(1.3rem, 4vw, 2rem);
+        font-size: clamp(1.2rem, 3.8vw, 2rem);
+        line-height: 1.4;
       }
     }
   </style>
@@ -1180,35 +1306,69 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
       celebration.classList.add('active');
       body.classList.add('celebration-active');
 
-      // Initial massive blast
+      // Reduced initial blast - less laggy
       createMassiveConfetti();
-      setTimeout(() => createMassiveConfetti(), 500);
-      setTimeout(() => createMassiveConfetti(), 1000);
+      setTimeout(() => createMassiveConfetti(), 800);
       
-      // Multiple heart explosions
+      // Fewer heart explosions initially
       createHeartBlossomExplosion();
-      setTimeout(() => createHeartBlossomExplosion(), 800);
-      setTimeout(() => createHeartBlossomExplosion(), 1600);
+      setTimeout(() => createHeartBlossomExplosion(), 1200);
       
-      // Multiple sparkle bursts
-      createSparkleExplosion();
-      setTimeout(() => createSparkleExplosion(), 600);
-      setTimeout(() => createSparkleExplosion(), 1200);
+      // Single sparkle burst initially
+      setTimeout(() => createSparkleExplosion(), 400);
       
-      // Continuous flying hearts
-      createFlyingHearts();
-      setTimeout(() => createFlyingHearts(), 1000);
-      setTimeout(() => createFlyingHearts(), 2000);
+      // Staggered flying hearts
+      setTimeout(() => createFlyingHearts(), 600);
+      setTimeout(() => createFlyingHearts(), 1400);
 
-      // Recurring effects - heart blossom now continuous
-      flyingHeartInterval = setInterval(createFlyingHearts, 4000); // Flying hearts every 4 seconds
-      sparkleInterval    = setInterval(createSparkleExplosion, 8000);
-      blossomInterval    = setInterval(createHeartBlossomExplosion, 4000); // Continuous heart explosions every 4 seconds
+      // Recurring effects with longer intervals - smoother performance
+      flyingHeartInterval = setInterval(createFlyingHearts, 5000); // Every 5 seconds (was 4)
+      sparkleInterval    = setInterval(createSparkleExplosion, 10000); // Every 10 seconds (was 8)
+      blossomInterval    = setInterval(createHeartBlossomExplosion, 6000); // Every 6 seconds (was 4)
+      
+      // Delayed start for floating hearts - prevents initial lag
+      setTimeout(() => {
+        const celebrationFloatingInterval = setInterval(createCelebrationFloatingHearts, 1200); // Slower rate
+      }, 2000); // Start after 2 seconds
+      
+      setTimeout(() => {
+        const celebrationDiagonalInterval = setInterval(createCelebrationDiagonalHearts, 1800); // Slower rate
+      }, 2500); // Start after 2.5 seconds
     });
+    
+    // Floating hearts from bottom for celebration page
+    function createCelebrationFloatingHearts() {
+      const hearts = ['💕','💖','💗','💝','💓','💞','❤️','💘'];
+      const roses = ['🌹','🌺','🌸','🌷'];
+      const isHeart = Math.random() > 0.3;
+      const el = document.createElement('div');
+      el.className = 'celebration-floating-heart';
+      el.textContent = isHeart ? hearts[Math.floor(Math.random()*hearts.length)] : roses[Math.floor(Math.random()*roses.length)];
+      el.style.left = Math.random()*100 + '%';
+      el.style.bottom = '-60px';
+      el.style.fontSize = (25 + Math.random()*20) + 'px';
+      el.style.animationDuration = (5 + Math.random()*3) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 8000);
+    }
+    
+    // Diagonal hearts for celebration page
+    function createCelebrationDiagonalHearts() {
+      const hearts = ['💕','💖','💗','💝','💓','💞','❤️','💘'];
+      const el = document.createElement('div');
+      el.className = 'celebration-diagonal-heart';
+      el.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      el.style.right = '-60px';
+      el.style.top = Math.random()*80 + '%';
+      el.style.fontSize = (35 + Math.random()*25) + 'px';
+      el.style.animationDuration = (6 + Math.random()*2) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 8000);
+    }
 
     function createMassiveConfetti() {
       const colors = ['#ff6b9d','#ffc2d1','#c7375f','#ff1493','#ffb6c1','#fff','#ffd700','#ff69b4'];
-      for (let i = 0; i < 400; i++) {
+      for (let i = 0; i < 250; i++) { // Reduced from 400 to 250
         setTimeout(() => {
           const c = document.createElement('div');
           c.className = 'confetti';
@@ -1221,7 +1381,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
           c.style.opacity = Math.random() * 0.5 + 0.5;
           document.body.appendChild(c);
           setTimeout(() => c.remove(), 6000);
-        }, i * 12);
+        }, i * 15); // Slightly slower spawn rate
       }
     }
 
@@ -1229,7 +1389,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
       const hearts = ['❤️','💕','💖','💗','💝','💓','💞','💟','❣️','💘'];
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i < 40; i++) { // Reduced from 60 to 40
         setTimeout(() => {
           const h = document.createElement('div');
           h.className = 'heart-blossom';
@@ -1237,7 +1397,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
           h.style.left = cx + 'px';
           h.style.top = cy + 'px';
           h.style.fontSize = (25 + Math.random()*40) + 'px';
-          const angle = Math.PI * 2 * i / 60;
+          const angle = Math.PI * 2 * i / 40; // Adjusted for new count
           const dist = 300 + Math.random()*400;
           const tx = Math.cos(angle) * dist;
           const ty = Math.sin(angle) * dist;
@@ -1246,13 +1406,13 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
           h.style.animation = `blossomFloat ${3 + Math.random()*2}s ease-out forwards`;
           document.body.appendChild(h);
           setTimeout(() => h.remove(), 6000);
-        }, i * 40);
+        }, i * 50); // Slightly slower spawn
       }
     }
 
     function createFlyingHearts() {
       const hearts = ['💕','💖','💗','💝','💓','💞','❤️','💘','💟','❣️'];
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 3; i++) { // Reduced from 5 to 3
         setTimeout(() => {
           const h = document.createElement('div');
           h.className = 'flying-heart';
@@ -1262,7 +1422,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
           h.style.animationDuration = (8 + Math.random()*4) + 's';
           document.body.appendChild(h);
           setTimeout(() => h.remove(), 12000);
-        }, i * 300);
+        }, i * 400); // Slightly slower spawn
       }
     }
 
@@ -1272,18 +1432,16 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
         {x:'80%',y:'20%'},
         {x:'20%',y:'80%'},
         {x:'80%',y:'80%'},
-        {x:'50%',y:'50%'},
-        {x:'50%',y:'20%'},
-        {x:'50%',y:'80%'}
-      ];
+        {x:'50%',y:'50%'}
+      ]; // Reduced from 7 to 5 positions
       pos.forEach(p => {
-        for (let i = 0; i < 24; i++) {
+        for (let i = 0; i < 16; i++) { // Reduced from 24 to 16
           setTimeout(() => {
             const s = document.createElement('div');
             s.className = 'sparkle';
             s.style.left = p.x;
             s.style.top = p.y;
-            const angle = Math.PI * 2 * i / 24;
+            const angle = Math.PI * 2 * i / 16; // Adjusted for new count
             const dist = 100 + Math.random()*120;
             const tx = Math.cos(angle) * dist;
             const ty = Math.sin(angle) * dist;
@@ -1292,7 +1450,7 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
             s.style.animation = `sparkleExplode ${1 + Math.random()*1.2}s ease-out forwards`;
             document.body.appendChild(s);
             setTimeout(() => s.remove(), 2500);
-          }, i * 25);
+          }, i * 30); // Slightly slower spawn
         }
       });
     }
