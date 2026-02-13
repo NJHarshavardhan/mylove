@@ -22,6 +22,7 @@
     html {
       scroll-behavior: smooth;
       overflow-x: hidden;
+      scroll-padding-top: 0;
     }
     body {
       font-family: 'Poppins', sans-serif;
@@ -468,17 +469,20 @@
       align-items: center;
       justify-content: center;
       opacity: 0;
-      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       overflow-y: auto;
       overflow-x: hidden;
       padding: 0;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
     }
     .celebration.active {
       display: flex;
-      animation: celebrationFadeIn 0.6s ease-out forwards;
+      animation: celebrationFadeIn 1s ease-out forwards;
     }
     @keyframes celebrationFadeIn {
-      to { opacity: 1; }
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
     .celebration-content {
       text-align: center;
@@ -492,18 +496,18 @@
       justify-content: center;
       min-height: 100vh;
       opacity: 0;
-      transform: scale(0.9) translateY(20px);
-      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: scale(0.95) translateY(30px);
+      transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
       gap: clamp(1rem, 2vh, 2rem);
     }
     .celebration.active .celebration-content {
       opacity: 1;
       transform: scale(1) translateY(0);
-      transition-delay: 0.2s;
+      transition-delay: 0.3s;
     }
     .celebration-content h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: clamp(4rem, 12vw, 9rem);
+      font-size: clamp(3rem, 10vw, 9rem);
       color: #ffffff;
       margin-bottom: clamp(1.5rem, 2.5vh, 3rem);
       text-shadow: 
@@ -513,10 +517,13 @@
         0 6px 40px rgba(0,0,0,0.6),
         0 10px 60px rgba(0,0,0,0.4);
       animation: pulseGlow 2s ease-in-out infinite;
-      line-height: 1.15;
+      line-height: 1.2;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       filter: drop-shadow(0 0 30px rgba(255,255,255,0.8));
+      word-wrap: break-word;
+      max-width: 95%;
+      padding: 0 10px;
     }
     @keyframes pulseGlow {
       0%,100% { 
@@ -703,6 +710,14 @@
       0% { transform: translate(0,0) scale(1); opacity: 1; }
       100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
     }
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    }
     
     /* Celebration page floating hearts from bottom */
     .celebration-floating-heart {
@@ -744,8 +759,10 @@
         gap: clamp(1rem, 1.8vh, 2rem);
       }
       .celebration-content h1 {
-        font-size: clamp(3rem, 10vw, 6rem);
+        font-size: clamp(2.5rem, 8vw, 5rem);
         margin-bottom: 1.2rem;
+        line-height: 1.25;
+        padding: 0 15px;
       }
       .subtitle-main {
         font-size: clamp(1.6rem, 5.5vw, 3rem);
@@ -768,6 +785,8 @@
       }
       .celebration-subtitle {
         font-size: clamp(1.4rem, 4.5vw, 2.5rem);
+        line-height: 1.5;
+        padding: 0 10px;
       }
     }
       .subtitle-main {
@@ -803,8 +822,11 @@
         gap: clamp(0.8rem, 1.4vh, 1.6rem);
       }
       .celebration-content h1 {
-        font-size: clamp(2.5rem, 9.5vw, 5rem);
+        font-size: clamp(2rem, 8vw, 4rem);
         margin-bottom: 1rem;
+        line-height: 1.3;
+        padding: 0 10px;
+        word-break: break-word;
       }
       .subtitle-main {
         font-size: clamp(1.4rem, 5vw, 2.5rem);
@@ -831,6 +853,8 @@
       }
       .celebration-subtitle {
         font-size: clamp(1.3rem, 4.2vw, 2.2rem);
+        line-height: 1.5;
+        padding: 0 8px;
       }
     }
     @media (max-width: 480px) {
@@ -844,8 +868,11 @@
         gap: clamp(0.6rem, 1.2vh, 1.3rem);
       }
       .celebration-content h1 {
-        font-size: clamp(2.2rem, 9vw, 4.5rem);
+        font-size: clamp(1.8rem, 7.5vw, 3.5rem);
         margin-bottom: 0.8rem;
+        line-height: 1.35;
+        padding: 0 8px;
+        word-break: break-word;
       }
       .subtitle-main {
         font-size: clamp(1.3rem, 4.5vw, 2.3rem);
@@ -873,6 +900,45 @@
       .celebration-subtitle {
         font-size: clamp(1.2rem, 3.8vw, 2rem);
         line-height: 1.4;
+        padding: 0 5px;
+      }
+    }
+    @media (max-width: 375px) {
+      .celebration-content {
+        padding: 1vh 3vw;
+        gap: clamp(0.5rem, 1vh, 1rem);
+      }
+      .celebration-content h1 {
+        font-size: clamp(1.5rem, 6.5vw, 3rem);
+        margin-bottom: 0.6rem;
+        line-height: 1.4;
+        padding: 0 5px;
+        letter-spacing: 0;
+      }
+      .subtitle-main {
+        font-size: clamp(1.1rem, 4vw, 2rem);
+        margin-bottom: 1rem;
+      }
+      .love-note {
+        font-size: clamp(0.95rem, 3vw, 1.4rem);
+        margin: 0.9rem auto;
+        line-height: 1.5;
+      }
+      .initials-heart {
+        width: clamp(100px, 28vw, 170px);
+        height: clamp(100px, 28vw, 170px);
+      }
+      .initials-text {
+        font-size: clamp(2.8rem, 7.5vw, 5rem);
+      }
+      .forever-text {
+        font-size: clamp(1.6rem, 5.5vw, 3rem);
+        margin: 1rem 0 0.7rem;
+      }
+      .celebration-subtitle {
+        font-size: clamp(1rem, 3.5vw, 1.8rem);
+        line-height: 1.35;
+        padding: 0 5px;
       }
     }
   </style>
@@ -1303,8 +1369,50 @@ Kannae un munnae vanthaal en nenjam kuzhanthaiyaagum 💕</div>
       floatingCount = 0;
       document.querySelectorAll('.floating-heart, .floating-rose, .diagonal-heart').forEach(el => el.remove());
 
-      celebration.classList.add('active');
-      body.classList.add('celebration-active');
+      // First make celebration visible but transparent
+      celebration.style.display = 'flex';
+      
+      // Smooth scroll to celebration section
+      setTimeout(() => {
+        celebration.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+      
+      // Wait for scroll to complete, then activate celebration with fade in
+      setTimeout(() => {
+        celebration.classList.add('active');
+        body.classList.add('celebration-active');
+      }, 1000);
+      
+      // Add Happy Valentine's Day message after content appears
+      setTimeout(() => {
+        const valentineMsg = document.createElement('div');
+        valentineMsg.innerHTML = '💝 Happy Valentine\'s Day 💝';
+        valentineMsg.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-family: 'Dancing Script', cursive;
+          font-size: clamp(2rem, 6vw, 4rem);
+          background: linear-gradient(135deg, #ff6b9d, #ffd700, #ff6b9d);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: gradientShift 3s ease-in-out infinite, fadeInScale 1s ease-out forwards;
+          filter: drop-shadow(0 0 20px rgba(255,107,157,0.8));
+          z-index: 10002;
+          text-align: center;
+          padding: 20px;
+          pointer-events: none;
+        `;
+        document.body.appendChild(valentineMsg);
+        
+        // Remove message after 4 seconds with fade out
+        setTimeout(() => {
+          valentineMsg.style.animation = 'fadeOut 1s ease-out forwards';
+          setTimeout(() => valentineMsg.remove(), 1000);
+        }, 4000);
+      }, 2000);
 
       // Reduced initial blast - less laggy
       createMassiveConfetti();
